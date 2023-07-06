@@ -6,7 +6,7 @@ from cheroot import wsgi
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession
 from app import create_app
-from engine import RecommendationEngine
+from engine import *
 
 conf = SparkConf().setAppName("movie_recommendation-server")
 sc = SparkContext(conf=conf, pyFiles=['engine.py', 'app.py'])

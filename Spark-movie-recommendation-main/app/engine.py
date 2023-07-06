@@ -131,7 +131,7 @@ spark = SparkSession.builder.appName("MovieRecommendation").getOrCreate()
 sc = spark.sparkContext
 
 # Création d'une instance de la classe RecommendationEngine
-engine = RecommendationEngine(sc, "/workspaces/Movies_recommendation_perso/Spark-movie-recommendation-main/app/ml-latest/movies.csv", "/workspaces/Movies_recommendation_perso/Spark-movie-recommendation-main/app/ml-latest/ratings.csv")
+engine = RecommendationEngine(sc, "Spark-movie-recommendation-main/app/ml-latest/movies.csv", "Spark-movie-recommendation-main/app/ml-latest/ratings.csv")
 
 # Exemple d'utilisation des méthodes de la classe RecommendationEngine
 user_id = engine.create_user(None)

@@ -3,7 +3,7 @@ import json
 import findspark
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
-from engine import RecommendationEngine
+from engine import *
 
 
 
@@ -79,3 +79,21 @@ def create_app(spark_context, movies_set_path, ratings_set_path):
     
     return app
 
+"""# Création de la session Spark
+spark = SparkSession.builder.appName("MovieRecommendation").getOrCreate()
+
+# Assignation du contexte Spark à la variable sc
+sc = spark.sparkContext
+
+# Création d'une instance de la classe RecommendationEngine
+engine = RecommendationEngine(sc, "Spark-movie-recommendation-main/app/ml-latest/movies.csv", "Spark-movie-recommendation-main/app/ml-latest/ratings.csv")
+
+# Exemple d'utilisation des méthodes de la classe RecommendationEngine
+user_id = engine.create_user(None)
+
+if engine.is_user_known(user_id):
+    movie = engine.get_movie(None)
+    ratings = engine.get_ratings_for_user(user_id)
+    engine.add_ratings(user_id, ratings)
+    prediction = engine.predict_rating(user_id, movie.movieId)
+    recommendations = engine.recommend_for_user(user_id, 10)"""
