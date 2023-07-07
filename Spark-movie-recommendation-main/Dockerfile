@@ -1,7 +1,35 @@
+#FROM apache/spark:3.4.0
+#WORKDIR /app
+#COPY . /app
+#COPY ./requirements.txt  /app/requirements.txt
+#RUN pip install -r requirements.txt
+#EXPOSE 5432
+#CMD ["spark-submit", "server.py", "ml-latest/movies.csv", "ml-latest/ratings.csv"]
+
 FROM apache/spark:3.4.0
+ 
+# Install any additional dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip
+ 
+ 
+# Set the working directory
 WORKDIR /app
-COPY . /app
-COPY ./requirements.txt  /app/requirements.txt
-RUN pip install -r requirements.txt
+ 
+# Copy the Spark project files to the container
+COPY ./app /app
+ 
+COPY ./requirements.txt /app
+ 
+COPY ./app/ml-latest /ml-latest
+ 
+# Install Python dependencies
+RUN pip3 install -r requirements.txt
+# RUN sed -i "s/localhost/$(curl http://checkip.amazonaws.com)/g" static/index.js
+ 
+# Expose the port for the web application
 EXPOSE 5432
+ 
+# Set the entry point
 CMD ["spark-submit", "server.py", "ml-latest/movies.csv", "ml-latest/ratings.csv"]
